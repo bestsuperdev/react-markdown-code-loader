@@ -25,3 +25,6 @@ dist
 # project files
 coverage
 .nyc_output
+
+
+.vscode

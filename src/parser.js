@@ -7,54 +7,6 @@ const
   escapeHtml = require('remarkable/lib/common/utils').escapeHtml,
   md = new Remarkable();
 
-/**
- * Wraps the code and jsx in an html component
- * for styling it later
- * @param   {string} exampleRun Code to be run in the styleguide
- * @param   {string} exampleSrc Source that will be shown as example
- * @param   {string} langClass  CSS class for the code block
- * @returns {string}            Code block with souce and run code
- */
-function codeBlockTemplate(exampleRun, exampleSrc, langClass) {
-  return `
-<div class="example">
-  <div class="run">${exampleRun}</div>
-  <div class="source">
-    <pre><code${!langClass ? '' : ` class="${langClass}"`}>
-      ${exampleSrc}
-    </code></pre>
-  </div>
-</div>`;
-}
-
-/**
- * Parse a code block to have a source and a run code
- * @param   {String}   code       - Raw html code
- * @param   {String}   lang       - Language indicated in the code block
- * @param   {String}   langPrefix - Language prefix
- * @param   {Function} highlight  - Code highlight function
- * @returns {String}                Code block with souce and run code
- */
-function parseCodeBlock(code, lang, langPrefix, highlight) {
-  let codeBlock = escapeHtml(code);
-
-  if (highlight) {
-    codeBlock = highlight(code, lang);
-  }
-
-  const
-    langClass = !lang ? '' : `${langPrefix}${escape(lang, true)}`,
-    jsx = code;
-
-  codeBlock = codeBlock
-    .replace(/{/g, '{"{"{')
-    .replace(/}/g, '{"}"}')
-    .replace(/{"{"{/g, '{"{"}')
-    .replace(/(\n)/g, '{"\\n"}')
-    .replace(/class=/g, 'className=');
-
-  return codeBlockTemplate(jsx, codeBlock, langClass);
-}
 
 /**
  * @typedef MarkdownObject
@@ -76,6 +28,7 @@ function parseCodeBlock(code, lang, langPrefix, highlight) {
  * @returns {HTMLObject}                HTML and imports
  */
 function parseMarkdown(markdown) {
+  markdown.attributes = markdown.attributes || {}
   return new Promise((resolve, reject) => {
     let html;
 
@@ -88,16 +41,25 @@ function parseMarkdown(markdown) {
     };
 
     md.set(options);
+    md.renderer.rules.fence_custom.attributes = (tokens, idx, options) => {
+      // add attributes
 
+      const codeTags = tokens[idx].params.split(/\s+/g)
+      if(!markdown.attributes[codeTags[1]]){
+        markdown.attributes[codeTags[1]] = []
+      }
+      if(codeTags.length >= 3){
+        markdown.attributes[codeTags[1]][codeTags[2]] = tokens[idx].content
+      }else{
+        markdown.attributes[codeTags[1]].push(tokens[idx].content)
+      }
+      return ''
+
+    };
     md.renderer.rules.fence_custom.render = (tokens, idx, options) => {
       // gets tags applied to fence blocks ```react html
       const codeTags = tokens[idx].params.split(/\s+/g);
-      return parseCodeBlock(
-        tokens[idx].content,
-        codeTags[codeTags.length - 1],
-        options.langPrefix,
-        options.highlight
-      );
+      return tokens[idx].content 
     };
 
     try {
@@ -132,9 +94,7 @@ function parse(markdown) {
 }
 
 module.exports = {
-  codeBlockTemplate,
   parse,
-  parseCodeBlock,
   parseFrontMatter,
   parseMarkdown
 };

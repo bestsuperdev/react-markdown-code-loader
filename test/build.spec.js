@@ -37,7 +37,7 @@ describe('Build Component', () => {
   });
 
   it('exports the front-matter attributes', () => {
-    component.should.contain('export const attributes = {"testFrontMatter":"hello world"}');
+    component.should.contain('export const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\n"]}');
   });
 
 });

@@ -8,6 +8,10 @@ imports:
 
 This is an example component
 
+```attributes codes
+var who = 'world'
+```
+
 ```render html
 <HelloWorld />
 <Button label="Hello World" />

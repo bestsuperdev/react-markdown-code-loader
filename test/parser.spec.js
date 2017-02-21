@@ -27,35 +27,23 @@ describe('Parse Markdown', () => {
     result.should.have.property('body');
   });
 
-  it('front matter attributes should contain imports object', () => {
+  it('front matter attributes should contain imports object and codes array', () => {
     const result = parser.parseFrontMatter(mdExample);
     result.attributes.should.have.property('imports');
     result.attributes.imports.should.be.a('object');
     result.attributes.imports.should
       .deep.equal({ Button: './button.js', HelloWorld: './hello-world.js' });
+    result.attributes.codes.should.be.a('array');
+    result.attributes.codes.should
+      .deep.equal(["var who = 'world'\n"]);
+      
   });
 
-  it('example code blocks have run and source code', () => {
-    const
-      exampleCode = 'example',
-      result = parser.codeBlockTemplate(exampleCode, exampleCode);
-
-    result.should.equal(`
-<div class="example">
-  <div class="run">example</div>
-  <div class="source">
-    <pre><code>
-      example
-    </code></pre>
-  </div>
-</div>`);
-  });
 
   it('parses markdown with live code blocks', done => {
     parser.parse(mdExample).then(result => {
-      result.html.should.contain(`<div class="run"><HelloWorld />
-<Button label="Hello World" />
-</div>`);
+      result.html.should.contain(`<HelloWorld />
+<Button label="Hello World" />`);
     })
     .then(done)
     .catch(done);

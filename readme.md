@@ -8,10 +8,14 @@ React Markdown
 
 This loader parses markdown files and converts them to a React Stateless Component.
 It will also parse FrontMatter to import dependencies and render components
-along with it’s source code.
+along with it’s source code and offer export code sources  
+
 
 We developed this loader in order to make the process of creating styleguides for
 React components easier
+
+
+this is fork from 
 
 ## Usage
 
