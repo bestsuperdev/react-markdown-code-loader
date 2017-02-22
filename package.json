@@ -9,8 +9,8 @@
     "loader",
     "markdown"
   ],
-  "homepage": "https://github.com/javiercf/react-markdown-loader",
-  "bugs": "https://github.com/javiercf/react-markdown-loader/issues",
+  "homepage": "https://github.com/bestsuperdev/react-markdown-code-loader",
+  "bugs": "https://github.com/bestsuperdev/react-markdown-code-loader/issues",
   "license": "MIT",
   "author": "Javier Cubides <javiercferrans@gmail.com>",
   "contributors": [
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/javiercf/react-markdown-loader.git"
+    "url": "https://github.com/bestsuperdev/react-markdown-code-loader.git"
   },
   "main": "src/index.js",
   "scripts": {
