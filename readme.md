@@ -61,6 +61,7 @@ export default function Hello(props) {
 *Hello.md*
 
 <pre>
+
 ---
 imports:
   Hello: './Hello.js'
@@ -81,6 +82,7 @@ You can send who to say Hello
 ```
 
 </pre>
+
 
 
 *app.jsx*
