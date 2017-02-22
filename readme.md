@@ -95,6 +95,7 @@ ReactDOM.render(<Hello />,document.body)
 
 ## Advance Usage
 
+<pre>
 
 ```hello.md
 ---
@@ -106,23 +107,24 @@ imports:
 ```
 
 ```attributes code
-<div>this code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes </div>
-<div>call this code ,use   "attributes.code[0]"  </div>
+&lt;div&gtthis code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes &lt;/div&gt
+&lt;div&gtcall this code ,use   "attributes.code[0]"  &lt;/div&gt
 ```
 
 
 ```attributes code
-<div>this code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes </div>
-<div>call this code ,use   "attributes.code[1]" </div>
+&lt;div&gtthis code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes &lt;/div&gt
+&lt;div&gtcall this code ,use   "attributes.code[1]" &lt;/div&gt
 ```
 
 
 ```render
-<Hello who={attributes.who} />
+&lt;Hello who={attributes.who} /&gt
 ```
 
 ```render
-<pre><code>attributes.code[0]</code></pre>
+&lt;pre&gt&lt;code&gtattributes.code[0]&lt;/code&gt&lt;/pre&gt
 ```
 
+</pre>
 
