@@ -96,15 +96,12 @@ ReactDOM.render(<Hello />,document.body)
 ## Advance Usage
 
 <pre>
-
-```hello.md
 ---
 imports:
   HelloWorld: './hello-world.js',
   '{ Component1, Component2 }': './components.js'
   who : 'world' 
 ---
-```
 
 ```attributes code
 &lt;div&gtthis code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes &lt;/div&gt
