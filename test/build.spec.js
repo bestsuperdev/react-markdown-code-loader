@@ -31,9 +31,11 @@ describe('Build Component', () => {
     component.should.contain('import React from \'react\';\n');
   });
 
-  it('add component imports', () => {
+  it('add component imports and requires ', () => {
     component.should.contain('import Button from \'./button.js\';\n');
     component.should.contain('import HelloWorld from \'./hello-world.js\';\n');
+    component.should.contain('require(\'./hello-world.css\');\n');
+    component.should.contain('require(\'./button.css\');\n');
   });
 
   it('exports the front-matter attributes', () => {

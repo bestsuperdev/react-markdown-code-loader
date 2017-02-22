@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 /**
  * Says hello to who
@@ -9,7 +9,3 @@ import React, { PropTypes } from 'react';
 export default function HelloWorld(props) {
   return <div className="hello-world">Hello { props.who }</div>;
 }
-
-HelloWorld.propTypes = { who: PropTypes.string };
-
-HelloWorld.defaultProps = { who: 'World' };

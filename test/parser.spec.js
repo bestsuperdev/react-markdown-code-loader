@@ -27,13 +27,17 @@ describe('Parse Markdown', () => {
     result.should.have.property('body');
   });
 
-  it('front matter attributes should contain imports object and codes array', () => {
+  it('front matter attributes should contain imports object and requires object', () => {
     const result = parser.parseFrontMatter(mdExample);
     result.attributes.should.have.property('imports');
     result.attributes.imports.should.be.a('object');
     result.attributes.imports.should
       .deep.equal({ Button: './button.js', HelloWorld: './hello-world.js' });
 
+    result.attributes.should.have.property('requires');
+    result.attributes.requires.should.be.a('array');
+    result.attributes.requires.should
+      .deep.equal(['./hello-world.css','./button.css']);
       
   });
 

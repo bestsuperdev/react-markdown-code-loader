@@ -1,5 +1,8 @@
 ---
 test-front-matter: 'hello world'
+requires : 
+  - './hello-world.css'
+  - './button.css'
 imports:
   Button: './button.js'
   HelloWorld: './hello-world.js'

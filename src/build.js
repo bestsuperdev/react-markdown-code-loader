@@ -20,9 +20,10 @@ module.exports = function build(markdown) {
   let doImports = 'import React from \'react\';\n';
   const
     imports = markdown.attributes.imports || {},
+    requires = markdown.attributes.requires || [],
     jsx = markdown.html.replace(/class=/g, 'className=');
 
-  const frontMatterAttributes = except(markdown.attributes, 'imports');
+  const frontMatterAttributes = except(markdown.attributes, 'imports','requires');
 
   for (const variable in imports) {
     // eslint-disable-next-line no-prototype-builtins
@@ -30,6 +31,9 @@ module.exports = function build(markdown) {
       doImports += `import ${variable} from '${imports[variable]}';\n`;
     }
   }
+  requires.forEach((style)=>{
+    doImports += `require('${style}');\n`;
+  })
   return `
     ${doImports}
 
