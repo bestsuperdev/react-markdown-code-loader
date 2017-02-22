@@ -30,16 +30,15 @@ module.exports = function build(markdown) {
       doImports += `import ${variable} from '${imports[variable]}';\n`;
     }
   }
-
   return `
-${doImports}
+    ${doImports}
 
-export const attributes = ${JSON.stringify(camelize(frontMatterAttributes))};
-export default function() {
-  return (
-    <div>
-      ${jsx}
-    </div>
-  );
-};`;
+    export const attributes = ${JSON.stringify(camelize(frontMatterAttributes))};
+    export default function() {
+      return (
+        <div>
+          ${jsx}
+        </div>
+      );
+    };`;
 };

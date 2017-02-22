@@ -16,11 +16,11 @@ describe('Build Component', () => {
       if (err) {
         return done(err);
       }
-
       parser
         .parse(data)
         .then(html => {
           component = build(html);
+          fs.writeFileSync(path.join(__dirname,'../log.js'),component)
           done();
         })
         .catch(done);
@@ -37,7 +37,7 @@ describe('Build Component', () => {
   });
 
   it('exports the front-matter attributes', () => {
-    component.should.contain('export const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\n"]}');
+    component.should.contain('export const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\\n"]}');
   });
 
 });

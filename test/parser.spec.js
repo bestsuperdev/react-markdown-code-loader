@@ -33,9 +33,7 @@ describe('Parse Markdown', () => {
     result.attributes.imports.should.be.a('object');
     result.attributes.imports.should
       .deep.equal({ Button: './button.js', HelloWorld: './hello-world.js' });
-    result.attributes.codes.should.be.a('array');
-    result.attributes.codes.should
-      .deep.equal(["var who = 'world'\n"]);
+
       
   });
 
@@ -66,5 +64,19 @@ describe('Parse Markdown', () => {
     .then(done)
     .catch(done);
   });
+
+  it('provides the codes attributes', (done) => {
+     parser.parse(mdExample).then(result => {
+      result.attributes.should.have.property('codes');
+      result.attributes.codes.should.be.a('array');
+      result.attributes.codes.should
+      .deep.equal(["var who = 'world'\n"]);
+    })
+    .then(done)
+    .catch(done);
+
+      
+  });
+
 
 });
