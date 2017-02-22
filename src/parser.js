@@ -48,11 +48,8 @@ function parseMarkdown(markdown) {
       if(!markdown.attributes[codeTags[1]]){
         markdown.attributes[codeTags[1]] = []
       }
-      if(codeTags.length >= 3){
-        markdown.attributes[codeTags[1]][codeTags[2]] = tokens[idx].content
-      }else{
-        markdown.attributes[codeTags[1]].push(tokens[idx].content)
-      }
+      markdown.attributes[codeTags[1]].push(tokens[idx].content)
+      
       return ''
 
     };
