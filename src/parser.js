@@ -4,7 +4,7 @@ const
   frontMatter = require('front-matter'),
   Prism = require('node-prismjs'),
   Remarkable = require('remarkable'),
-  escapeHtml = require('remarkable/lib/common/utils').escapeHtml,
+  // escapeHtml = require('remarkable/lib/common/utils').escapeHtml,
   md = new Remarkable();
 
 

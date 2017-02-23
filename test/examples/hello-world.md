@@ -6,6 +6,10 @@ requires :
 imports:
   Button: './button.js'
   HelloWorld: './hello-world.js'
+exports  : 
+  - Button
+  - HelloWorld
+
 ---
 # Hello World
 

@@ -1,6 +1,6 @@
 'use strict';
-const camelize = require('camelize');
-const except = require('except');
+const camelize = require('camelize')
+const except = require('except')
 
 /**
  * @typedef HTMLObject
@@ -17,32 +17,41 @@ const except = require('except');
  */
 module.exports = function build(markdown) {
 
-  let doImports = 'import React from \'react\';\n';
-  const
-    imports = markdown.attributes.imports || {},
-    requires = markdown.attributes.requires || [],
-    jsx = markdown.html.replace(/class=/g, 'className=');
+	const doImports = ['import React from \'react\';\n']
+	const doExports = []
+	const imports = markdown.attributes.imports || {} 
+	const requires = markdown.attributes.requires || [] 
+	const exports = markdown.attributes.exports || [] 
+	const jsx = markdown.html.replace(/class=/g, 'className=')
 
-  const frontMatterAttributes = except(markdown.attributes, 'imports','requires');
+	const frontMatterAttributes = except(markdown.attributes, 'imports','requires','exports')
 
-  for (const variable in imports) {
-    // eslint-disable-next-line no-prototype-builtins
-    if (imports.hasOwnProperty(variable)) {
-      doImports += `import ${variable} from '${imports[variable]}';\n`;
-    }
-  }
-  requires.forEach((style)=>{
-    doImports += `require('${style}');\n`;
-  })
-  return `
-    ${doImports}
+	for (const key in imports) {
+		// eslint-disable-next-line no-prototype-builtins
+		if (imports.hasOwnProperty(key)) {
+			doImports.push(`import ${key} from '${imports[key]}';\n`)
+		}
+	}
+	requires.forEach((style)=>{
+		doImports.push(`require('${style}');\n`)
+	})
+	if(exports && exports.length > 0){
+		doExports.push(`attributes.exports = [${exports.join(',')}];\n`)
+		// doExports.push(`attributes.exports`)
+	}
+	return `
+${doImports.join('')}
+		
+const attributes = ${JSON.stringify(camelize(frontMatterAttributes))};
+		
+${doExports.join('')}
 
-    export const attributes = ${JSON.stringify(camelize(frontMatterAttributes))};
-    export default function() {
-      return (
-        <div>
-          ${jsx}
-        </div>
-      );
-    };`;
+export {attributes}
+export default function() {
+	return (
+		<div>
+			${jsx}
+		</div>
+	);
+};`;
 };

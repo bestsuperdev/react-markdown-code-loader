@@ -39,7 +39,12 @@ describe('Build Component', () => {
   });
 
   it('exports the front-matter attributes', () => {
-    component.should.contain('export const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\\n"]}');
+    component.should.contain('const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\\n"]}');
+    component.should.contain('export {attributes}')
+  });
+
+  it('exports the exports attributes from imports ', () => {
+    component.should.contain('attributes.exports = [Button,HelloWorld]')
   });
 
 });
