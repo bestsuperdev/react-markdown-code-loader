@@ -1,13 +1,13 @@
 React Markdown 
 ==================
 
-React Markdown Loader with code sources as attributes
+React Markdown Loader with code sources as props
 
 This is a fork of [react-markdown-loader](https://github.com/javiercf/react-markdown-loader) and add some features
 
 This loader parses markdown files and converts them to a React Stateless Component.
 It will also parse FrontMatter to import dependencies and render components
-~~along with it’s source code~~ and  export code sources as key on attributes
+~~along with it’s source code~~ and  export code sources as key on props
 
 
 I forkedd this loader in order to make the process of creating styleguides for
@@ -63,7 +63,7 @@ export default function Hello(props) {
 <pre>
 
 ---
-imports:
+imports():
   Hello: './Hello.js'
 ---
 
@@ -99,31 +99,29 @@ ReactDOM.render(<Hello />,document.body)
 
 <pre>
 ---
-imports:
+imports():
   HelloWorld: './hello-world.js',
   '{ Component1, Component2 }': './components.js'
   who : 'world' 
 ---
 
-```attributes code
-&lt;div&gtthis code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes &lt;/div&gt
-&lt;div&gtcall this code ,use   "attributes.code[0]"  &lt;/div&gt
+```source code1
+&lt;div&gtthis code block with tag "props xx" would not be rendered in the markdown/component,it would be set in the props &lt;/div&gt
+&lt;div&gtcall this code ,use   "props.code[0]"  &lt;/div&gt
 ```
 
 
-```attributes code
-&lt;div&gtthis code block with tag "attributes xx" would not be rendered in the markdown/component,it would be set in the attributes &lt;/div&gt
-&lt;div&gtcall this code ,use   "attributes.code[1]" &lt;/div&gt
+```source code2
+&lt;div&gtthis code block with tag "props xx" would not be rendered in the markdown/component,it would be set in the props &lt;/div&gt
+&lt;div&gtcall this code ,use   "props.code[1]" &lt;/div&gt
 ```
 
 
 ```render
-&lt;Hello who={attributes.who} /&gt
+&lt;Hello who={props.who} /&gt
 ```
 
-```render
-&lt;pre&gt&lt;code&gtattributes.code[0]&lt;/code&gt&lt;/pre&gt
-```
+
 
 </pre>
 
