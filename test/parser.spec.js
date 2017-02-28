@@ -29,14 +29,14 @@ describe('Parse Markdown', () => {
 
   it('front matter attributes should contain imports object and requires object', () => {
     const result = parser.parseFrontMatter(mdExample);
-    result.attributes.should.have.property('imports');
-    result.attributes.imports.should.be.a('object');
-    result.attributes.imports.should
-      .deep.equal({ Button: './button.js', HelloWorld: './hello-world.js' });
+    result.attributes.should.have.property('imports()');
+    result.attributes['imports()'].should.be.a('object');
+    result.attributes['imports()'].should
+      .deep.equal({ Button: './button.js', 'HelloWorld,{SubHelloWorld}': './hello-world.js' });
 
-    result.attributes.should.have.property('requires');
-    result.attributes.requires.should.be.a('array');
-    result.attributes.requires.should
+    result.attributes.should.have.property('requires()');
+    result.attributes['requires()'].should.be.a('array');
+    result.attributes['requires()'].should
       .deep.equal(['./hello-world.css','./button.css']);
       
   });
@@ -71,10 +71,9 @@ describe('Parse Markdown', () => {
 
   it('provides the codes attributes', (done) => {
      parser.parse(mdExample).then(result => {
-      result.attributes.should.have.property('codes');
-      result.attributes.codes.should.be.a('array');
-      result.attributes.codes.should
-      .deep.equal(["var who = 'world'\n"]);
+      result.attributes.should.have.property('code');
+      // result.attributes.codes.should.be.a('array');
+      result.attributes.code.should.contain("var who = 'world'");
     })
     .then(done)
     .catch(done);

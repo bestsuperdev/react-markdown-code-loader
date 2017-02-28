@@ -33,18 +33,20 @@ describe('Build Component', () => {
 
   it('add component imports and requires ', () => {
     component.should.contain('import Button from \'./button.js\';\n');
-    component.should.contain('import HelloWorld from \'./hello-world.js\';\n');
+    component.should.contain('import HelloWorld,{SubHelloWorld} from \'./hello-world.js\';\n');
     component.should.contain('require(\'./hello-world.css\');\n');
     component.should.contain('require(\'./button.css\');\n');
   });
 
   it('exports the front-matter attributes', () => {
-    component.should.contain('const attributes = {"testFrontMatter":"hello world","codes":["var who = \'world\'\\n"]}');
-    component.should.contain('export {attributes}')
+    component.should.contain('const props = {');
+    component.should.contain('export {props}')
   });
 
   it('exports the exports attributes from imports ', () => {
-    component.should.contain('attributes.exports = [Button,HelloWorld]')
+    component.should.contain('props.exports = {Button,HelloWorld}')
+    component.should.contain('props.exports.length = ')
+    component.should.contain('props.exports.splice = function(){}')
   });
 
 });

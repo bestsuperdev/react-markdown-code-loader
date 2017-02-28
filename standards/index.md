@@ -4,9 +4,25 @@
 
 ## funtions keys
 
+- requires()
 - imports()
 - exports()
 - includes()
+
+### requires()
+
+```
+---
+requires() : 
+    - a.css
+    - b.css
+
+```
+
+```
+require('a.css')
+require('b.css')
+```
 
 ### imports()
 
@@ -187,6 +203,10 @@ export {props}
 ## generate codes order
 
 ```
+//requires() codes here 
+require('a.less')
+
+
 
 //includes() codes here 
 
@@ -212,4 +232,80 @@ MarkdownComponent.defaultProps = props
 
 export default MarkdownComponent
 export {props}
+```
+
+
+## the first scene
+
+```
+index.md
+lib/
+    index.md
+    storage.md
+    assign.md
+components/
+    index.md
+    Modal.md
+    Button.md
+```
+
+index.md
+
+``` 
+---
+
+includes() : 
+    - ./lib
+    - ./components
+
+---
+
+```
+
+
+
+lib/index.md
+
+```
+---
+menuName : lib
+subMenusName : 
+    - storage
+    - assign
+includes():
+    - ./storage
+    - ./assign
+
+---
+
+```
+
+lib/storage
+
+```
+---
+
+imports() : 
+    'Display,{Item}' : './Display'
+    Header : './Header'
+
+title : Header
+description : this is description of Header
+
+
+---
+
+```source _code1
+let name = storage.get('name')
+console.log(name)
+```
+
+```render
+<Header title={props.title} description={props.description} />
+```
+
+```render
+<Display title={props.title}>
+    <Item code={_code1}><button onClick={()=> console.log(storage.get('name')) }>get storage data</button></Item>
+</Display>
 ```
