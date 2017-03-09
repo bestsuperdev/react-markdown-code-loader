@@ -7,7 +7,7 @@ This is a fork of [react-markdown-loader](https://github.com/javiercf/react-mark
 
 This loader parses markdown files and converts them to a React Stateless Component.
 It will also parse FrontMatter to import dependencies and render components
-~~along with it’s source code~~ and  export code sources as key on props
+~~along with it’s source code~~ and  export code sources
 
 
 I forkedd this loader in order to make the process of creating styleguides for
