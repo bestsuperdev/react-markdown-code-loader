@@ -138,11 +138,8 @@ a  private variables start with  "_"
 局部变量也可以直接用来定义代码块，方便展示事例代码
 
 
-
     ---
-
         _name : private variables
-
     ---
 
     ```source _code
